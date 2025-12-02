@@ -14,6 +14,7 @@ library(vroom)
 library(here)
 library (knitr)
 library(ggplot2)
+library(lubridate)
 
 here::i_am("eval-grades.Rproj")
 ```
@@ -113,5 +114,26 @@ students |>
     y = "Proportion of Students",
     fill = "Sex"
   )
+```
+
+### Question 7
+
+```{r}
+
+students <- students |>
+  mutate(
+    age = floor(time_length(today() - birth_date, unit = "year"))
+  )
+
+
+students |>
+  ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 1, fill = "pink") +
+  labs(
+    title = "Distribution of Student Ages",
+    x = "Age (years)",
+    y = "Number of Students"
+  )
+
 ```
 
