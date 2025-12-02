@@ -84,3 +84,20 @@ NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
 ## Student population
 
 ### Question 5
+
+```{r}
+
+students_count <- students |>
+  group_by(group) |>
+  summarise(n_students = n())
+
+ggplot(students_count, aes(x = group, y = n_students)) +
+  geom_col(fill = "orange") +
+  labs(
+    title = "Number of Students per Group",
+    x = "Group",
+    y = "Number of Students"
+  )
+```
+
+
