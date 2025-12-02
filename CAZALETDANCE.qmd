@@ -248,19 +248,19 @@ grades_per_student |>
   )
 
 
-grades_per_student_summary <- tibble(
-  Minimum = min(grades_per_student$n_grades),
-  Maximum = max(grades_per_student$n_grades),
-  Average = round(mean(grades_per_student$n_grades), 2),
-  Median = median(grades_per_student$n_grades)
-)
+
+Minimum <- min(grades_per_student$n_grades)
+Maximum <- max(grades_per_student$n_grades)
+mean_grades <- round(mean(grades_per_student$n_grades), 2)
+median_grades <- median(grades_per_student$n_grades)
+
 
 
 ```
 | Statistic | Value |
 |-----------|-------|
-| Minimum   | `r min_grades` |
-| Maximum   | `r max_grades` |
+| Minimum   | `r Minimum` |
+| Maximum   | `r Maximum` |
 | Average   | `r mean_grades` |
 | Median    | `r median_grades` |
 
@@ -302,6 +302,19 @@ yoga_grades |>
 
 ```
 
+### Question 16
+
+```{r}
+yoga_grades |>
+  count(n_yoga_grades) |>
+  ggplot(aes(x = n_yoga_grades, y = n)) +
+  geom_col(fill = "lightblue") +
+  labs(
+    title = "Distribution of number of yoga and meditation grades",
+    x = "Number of Grades",
+    y = "Number of Students"
+  )
+```
 
 
 NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
