@@ -316,5 +316,20 @@ yoga_grades |>
   )
 ```
 
+# Question 17
+
+```{r}
+yoga_grades |>
+  ggplot(aes(x = factor(group), y = n_yoga_grades)) +
+  geom_boxplot(fill = "lightpink", alpha = 0.6) + 
+  labs(
+    title = "Number of Yoga and Meditation Grades per Student by Group",
+    x = "Group",
+    y = "Number of Grades"
+  ) 
+
+```
+
+The number of grades per student does not seem to depend on the group.
 
 NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
