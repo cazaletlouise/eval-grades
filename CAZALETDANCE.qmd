@@ -150,3 +150,19 @@ median_age_group |>
   )
 ```
 
+### Question 9
+
+```{r}
+oldest_students <- students |>
+  group_by(group) |>
+  slice_max(order_by = age) |>
+  select(id, sex, age) |>
+  arrange(desc(age))
+
+
+oldest_students |>
+  kable(
+    caption = "Oldest student in each group"
+  )
+```
+
