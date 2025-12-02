@@ -546,5 +546,23 @@ ggplot(pass_rate_by_group, aes(x = factor(group), y = pass_rate)) +
   )
 ```
 
+```{r}
+
+
+fail_course_counts <- grades_avg |>
+  filter(avg_grade < 5) |>
+  group_by(course) |>
+  summarise(
+    n_failures = n(),
+    .groups = "drop"
+  ) |>
+  arrange(desc(n_failures))
+
+most_fail_course <- fail_course_counts |> slice_head(n = 1)
+most_fail_course
+
+
+```
+
 
 NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
