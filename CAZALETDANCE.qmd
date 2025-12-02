@@ -401,21 +401,60 @@ grades_wide |>
 ### Question 21
 
 ```{r}
-correlation_by_group <- grades_wide |>
+cor_by_group <- grades_wide |>
   group_by(group) |>
   summarise(
-    cor_pol_music = cor(
-      `Politics and Diplomacy`,
-      `Music and Dance`,
-      use = "complete.obs"
-    ),
+    cor_pol_music = cor(`Politics and Diplomacy`, `Music and Dance`, use = "complete.obs"),
     .groups = "drop"
   )
 ```
 
+### Question 22
+
+```{r}
+target_group <- cor_by_group |>
+  slice_max(order_by = abs(cor_pol_music), n = 1) |>
+  pull(group)
+
+grades_wide |>
+  filter(group == target_group) |>
+  ggplot(aes(
+    x = `Music and Dance`,
+    y = `Politics and Diplomacy`
+  )) +
+  geom_point(alpha = 0.7, color = "blue", size = 3) +
+  geom_smooth(method = "lm", color = "red") +
+  labs(
+    title = "Politics and Diplomacy vs Music and Dance",
+    x = "Average Grade in Music and Dance",
+    y = "Average Grade in Politics and Diplomacy"
+  )
+```
+
+### Question 23
+
+```{r}
+
+final_grades <- grades_wide |>
+  left_join(students |> select(id, sex), by = "id") |> 
+  rowwise() |>
+  mutate(
+    final_grade = mean(c_across(where(is.numeric) & !c(id, group)), na.rm = TRUE)
+  ) |>
+  ungroup() |>
+  select(id, group, sex, final_grade) |>
+  arrange(desc(final_grade))
 
 
+final_grades |>
+  slice_head(n = 5) |>
+  kable(
+    caption = "Top 5 students by final grade",
+    digits = 2,
+    align = "c"
+  )
 
+```
 
 
 NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
