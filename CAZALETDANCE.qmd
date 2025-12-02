@@ -332,4 +332,58 @@ yoga_grades |>
 
 The number of grades per student does not seem to depend on the group.
 
+### Question 18 
+
+```{r}
+yoga_grades <- yoga_grades |>
+  left_join(students |> select(id, sex), by = "id")
+
+yoga_grades |>
+  ggplot(aes(x = factor(group), y = n_yoga_grades, fill = sex)) +
+  geom_boxplot(alpha = 0.6, position = position_dodge(width = 0.8)) +
+  labs(
+    title = "Number of Yoga and Meditation grades by group and sex",
+    x = "Group",
+    y = "Number of Grades",
+    fill = "Sex"
+  )
+```
+
+## Grade analysis
+
+### Question 19
+
+```{r}
+
+grades_avg <- grades |>
+  filter(!is.na(grade)) |>
+  group_by(id, course_id) |>
+  summarise(avg_grade = mean(grade), .groups = "drop") |>
+  left_join(students |> select(id, group), by = "id") |>
+  left_join(courses |> select(course_id, course), by = "course_id")
+
+
+grades_wide <- grades_avg |>
+  select(id, group, course, avg_grade) |>
+  pivot_wider(
+    names_from = course,
+    values_from = avg_grade
+  )
+
+
+grades_wide |>
+  select(id, group, `Yoga and Meditation`, `Sanskrit Language and Literature`) |>
+  slice_head(n = 5) |>
+  kable(
+    caption = "Extract of Average Grades per Student for Selected Courses",
+    align = "c"
+  )
+
+```
+
+
+
+
+
+
 NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
