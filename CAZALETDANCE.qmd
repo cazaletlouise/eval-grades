@@ -381,6 +381,38 @@ grades_wide |>
 
 ```
 
+### Question 20
+
+```{r}
+grades_wide |>
+  ggplot(aes(
+    x = `Yoga and Meditation`,
+    y = `Martial Arts and Self-Defense`
+  )) +
+  geom_point(alpha = 1, color = "darkgreen", size = 1) +  
+  geom_smooth(method = "lm", color = "sienna") 
+  labs(
+    title = "Average Grades: Martial Arts vs Yoga and Meditation",
+    x = "Average Grade in Yoga and Meditation",
+    y = "Average Grade in Martial Arts and Self-Defense"
+  )
+```
+
+### Question 21
+
+```{r}
+correlation_by_group <- grades_wide |>
+  group_by(group) |>
+  summarise(
+    cor_pol_music = cor(
+      `Politics and Diplomacy`,
+      `Music and Dance`,
+      use = "complete.obs"
+    ),
+    .groups = "drop"
+  )
+```
+
 
 
 
