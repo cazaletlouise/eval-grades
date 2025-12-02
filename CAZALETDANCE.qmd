@@ -12,6 +12,7 @@ library(dplyr)
 library(tidyr)
 library(vroom)
 library(here)
+library (knitr)
 
 here::i_am("eval-grades.Rproj")
 ```
@@ -26,5 +27,17 @@ here::i_am("eval-grades.Rproj")
 ```{r}
 courses <- vroom(
   here("data", "courses.csv"))
+```
+##### Question 2
+
+```{r}
+courses |>
+  rename(
+  `course name` = course,
+  identifier = course_id,
+  `number of grades` = nb_grades
+) |>
+  arrange(`course name`) |>
+  kable()
 ```
 
