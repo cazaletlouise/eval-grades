@@ -546,9 +546,9 @@ ggplot(pass_rate_by_group, aes(x = factor(group), y = pass_rate)) +
   )
 ```
 
+
+### Question 29
 ```{r}
-
-
 fail_course_counts <- grades_avg |>
   filter(avg_grade < 5) |>
   group_by(course) |>
@@ -563,6 +563,25 @@ most_fail_course
 
 
 ```
+### Question 30
 
+```{r}
 
-NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
+students_with_pass <- students |>
+  left_join(students_pass |> select(id, pass), by = "id")
+success_by_age <- students_with_pass |>
+  group_by(age) |>
+  summarise(success_rate = mean(pass), .groups = "drop")
+
+ggplot(success_by_age, aes(x = age, y = success_rate)) +
+  geom_col(fill = "steelblue") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    x = "Age",
+    y = "Success rate",
+    title = "Success rate as a function of student age"
+  ) 
+
+```
+The success rate varies more noticeably across age groups rather than individual ages. For example, students in the 20–29 age range show around a 60% success rate, while students aged 30 and above almost always have a 100% success rate.
+
