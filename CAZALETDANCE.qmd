@@ -10,6 +10,8 @@ https://github.com/cazaletlouise/eval-grades
 
 
 ```{r}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+
 # Necessary packages 
 library(readr)
 library(dplyr)
@@ -32,7 +34,7 @@ here::i_am("eval-grades.Rproj")
 
 ```{r}
 courses <- vroom(
-  here("data", "courses.csv"))
+  here("data", "courses.csv"), show_col_types = FALSE)
 ```
 ##### Question 2
 
@@ -53,7 +55,7 @@ courses |>
 
 ```{r}
 students <- vroom(
-  here("data", "students.csv"))
+  here("data", "students.csv"), show_col_types = FALSE)
 
 students <- students |>
   mutate(
@@ -80,7 +82,8 @@ The sex column of the students data frame is of class `{r} sex_class`.
 grades <- vroom(
   here("data", "grades.csv"),
   delim = "|",   
-  na = "_"      
+  na = "_", 
+  show_col_types = FALSE
 )
 
 ```
@@ -118,6 +121,8 @@ students |>
     fill = "Sex"
   )
 ```
+Gender distribution is balanced between male and female students in each group.
+
 
 ### Question 7
 
@@ -139,6 +144,7 @@ students |>
   )
 
 ```
+The distribution of the age of student is highly concentrated around 21-22 years old.
 
 ### Question 8
 
@@ -203,6 +209,8 @@ avg_sanskrit |>
 
 ```
 
+The average grade of the course Sanskrit Language and Literature does not seem to depend on the group.
+
 ### Question 12
 
 ```{r}
@@ -222,7 +230,7 @@ grades_semester|>
 
 ```
 
-
+There seems to be higher grades in semester 1 then semester 2. Also, it seems that in semester 2 the grades were more concentrated around 10.
 
 ## Attendance analysis 
 
@@ -279,6 +287,8 @@ grades_per_student |>
     fill = "Sex"
   ) 
 ```
+The distribution of the number of grades does not seem to depend on the sex. 
+
 
 ### Question 15
 
@@ -348,6 +358,7 @@ yoga_grades |>
     fill = "Sex"
   )
 ```
+The sex does not seem to have an impact on the number of Yoga and Meditation grades by group.
 
 ## Grade analysis
 
@@ -397,6 +408,8 @@ grades_wide |>
     y = "Average Grade in Martial Arts and Self-Defense"
   )
 ```
+There seem to be a positive relation between the Average Grade in Yoga and Meditation and the Average Grade in Martial Arts and Self-Defense.
+
 
 ### Question 21
 
@@ -545,7 +558,7 @@ ggplot(pass_rate_by_group, aes(x = factor(group), y = pass_rate)) +
     title = "Pass rate per group"
   )
 ```
-
+On this graph, we can see that the pass rate highly varies between the groups.
 
 ### Question 29
 ```{r}
