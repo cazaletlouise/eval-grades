@@ -516,6 +516,16 @@ students_pass |>
 ```
 
 
+### Question 27
+
+```{r}
+students_fail_high <- students_pass |>
+  filter(!pass & final_grade >= 10)
+n_fail_high <- nrow(students_fail_high)
+cat("The number of students who do not pass but have a final grade >= 10 is:", n_fail_high, "\n")
+
+
+```
 
 
 
