@@ -456,5 +456,21 @@ final_grades |>
 
 ```
 
+### Question 24
+
+```{r}
+final_grades |>
+  ggplot(aes(x = factor(group), y = final_grade)) +
+  geom_boxplot(fill = "violet", alpha = 0.6) +
+  labs(
+    x = "Group",
+    y = "Final Grade",
+    title = "Distribution of Final Grades by Group"
+  ) 
+
+```
+The distribution of final grades varies across groups. In particular, groups 1 and 14 appear to have higher/lower grades compared to groups such as 3 and 15
+
+
 
 NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
