@@ -488,6 +488,35 @@ final_grades |>
 
 We can see a slight difference between the grades of women and men within the same group. Some groups, like group 1 and group 10, show a wider distribution of grades for men. 
 
+### Question 26
+
+```{r}
+
+grades_avg_sem <- grades_avg |>
+  left_join(courses |> select(course, semester), by = "course")
+
+students_pass <- grades_avg_sem |>
+  group_by(id, group) |>
+  summarise(
+    final_grade = mean(avg_grade, na.rm = TRUE),
+    pass_courses = all(avg_grade >= 5),
+    semester1_avg = mean(avg_grade[semester == 1], na.rm = TRUE),
+    semester2_avg = mean(avg_grade[semester == 2], na.rm = TRUE),
+    pass = pass_courses & semester1_avg >= 10 & semester2_avg >= 10,
+    .groups = "drop"
+  )
+
+students_pass |>
+  slice_head(n = 5) |>
+  knitr::kable(
+    caption = "First five students with final grade and pass/fail",
+    align = "c"
+  )
+
+```
+
+
+
 
 
 NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
