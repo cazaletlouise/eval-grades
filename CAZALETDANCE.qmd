@@ -137,3 +137,16 @@ students |>
 
 ```
 
+### Question 8
+
+```{r}
+median_age_group <- students |>
+  group_by(group) |>
+  summarise(median_age = as.integer(median(age)))
+
+median_age_group |>
+  kable(
+    caption = "Median age of students per group"
+  )
+```
+
