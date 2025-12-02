@@ -166,3 +166,12 @@ oldest_students |>
   )
 ```
 
+## Simple grade analysis
+
+### Question 10 
+
+```{r}
+n_grades <- sum(!is.na(grades$grade))
+```
+
+The data set contains `r n_grades` grades.
