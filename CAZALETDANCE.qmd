@@ -100,4 +100,18 @@ ggplot(students_count, aes(x = group, y = n_students)) +
   )
 ```
 
+### Question 6
+
+```{r}
+students |>
+  ggplot(aes(x = group, fill = sex)) +
+  geom_bar(position = "fill") +  
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Gender Balance per Group",
+    x = "Group",
+    y = "Proportion of Students",
+    fill = "Sex"
+  )
+```
 
