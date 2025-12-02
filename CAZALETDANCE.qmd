@@ -527,6 +527,24 @@ cat("The number of students who do not pass but have a final grade >= 10 is:", n
 
 ```
 
+### Question 28 
+```{r}
+pass_rate_by_group <- students_pass |>
+  group_by(group) |>
+  summarise(
+    pass_rate = mean(pass) * 100,
+    .groups = "drop"
+  )
+
+
+ggplot(pass_rate_by_group, aes(x = factor(group), y = pass_rate)) +
+  geom_col(fill = "red") +
+  labs(
+    x = "Group",
+    y = "Pass rate (%)",
+    title = "Pass rate per group"
+  )
+```
 
 
 NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
