@@ -13,6 +13,7 @@ library(tidyr)
 library(vroom)
 library(here)
 library (knitr)
+library(ggplot2)
 
 here::i_am("eval-grades.Rproj")
 ```
@@ -66,4 +67,20 @@ The birth_date column of the students data frame is of class `{r} birth_date_cla
 
 The sex column of the students data frame is of class `{r} sex_class`.
 
+### Grades
 
+#### Question 4
+
+```{r}
+grades <- vroom(
+  here("data", "grades.csv"),
+  delim = "|",   
+  na = "_"      
+)
+
+```
+NE PAS OUBLIER D'ENLEVER LES WARNING A LA FIN
+
+## Student population
+
+### Question 5
