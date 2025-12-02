@@ -212,7 +212,7 @@ grades_semester<- grades |>
 
 grades_semester|>
   ggplot(aes(x = grade, fill = factor(semester))) +
-  geom_density(alpha = 0.3) +
+  geom_density(alpha=0.5) +
   labs(
     title = "Distribution of grades by semester",
     x = "Grade",
@@ -264,6 +264,21 @@ grades_per_student_summary <- tibble(
 | Average   | `r mean_grades` |
 | Median    | `r median_grades` |
 
+
+### Question 14
+
+
+```{r}
+grades_per_student |>
+  ggplot(aes(x = n_grades, fill = sex)) +
+  geom_density(alpha = 0.4) +       
+  labs(
+    title = "Distribution of number of grades by sex",
+    x = "Number of grades",
+    y = "Density",
+    fill = "Sex"
+  ) 
+```
 
 
 
