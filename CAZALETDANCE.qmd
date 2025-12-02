@@ -280,6 +280,27 @@ grades_per_student |>
   ) 
 ```
 
+### Question 15
+
+```{r}
+yoga_grades <- grades |>
+  filter(!is.na(grade)) |>
+  inner_join(courses, by = "course_id") |>
+  filter(course == "Yoga and Meditation") |>
+  group_by(id) |>
+  summarise(n_yoga_grades = n(), .groups = "drop") |>
+  left_join(students |> select(id, group), by = "id")
+
+
+yoga_grades |> 
+  slice_head(n = 5) |>
+  kable(
+    caption = "Number of Yoga and Meditation grades per student",
+    align = "c"
+  )
+
+
+```
 
 
 
